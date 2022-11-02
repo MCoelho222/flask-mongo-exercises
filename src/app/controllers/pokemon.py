@@ -111,3 +111,39 @@ def list_more_vitories_over_seven():
         mimetype='application/json'
     )
 
+@pokemons.route("/list_type_fire_alphabetically", methods=['GET'])
+def list_type_fire_alphabetically():
+    fireTypes = mongo_client.pokemons.aggregate([
+    {
+        '$match': {
+            'Type 1': 'Fire', 
+            'Type 2': None
+        }
+    }, {
+        '$sort': {
+            'Name': 1
+        }
+    }, {
+        '$lookup': {
+            'from': 'combats', 
+            'localField': '#', 
+            'foreignField': 'Winner', 
+            'as': 'victories'
+        }
+    }, {
+        '$project': {
+            '_id': 0, 
+            '#': 1, 
+            'Name': 1, 
+            'Type 1': 1, 
+            'TotalVictories': {
+                '$size': '$victories'
+            }
+        }
+    }
+    ])
+    return Response(
+        response=json_util.dumps({"records": fireTypes}),
+        status=200,
+        mimetype='application/json'
+    )
