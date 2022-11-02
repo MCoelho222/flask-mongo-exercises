@@ -147,3 +147,35 @@ def list_type_fire_alphabetically():
         status=200,
         mimetype='application/json'
     )
+
+@pokemons.route("/legendary_pokemons_most_winners", methods=['GET'])
+def legendary_pokemons_most_winners():
+    legendary_winners = mongo_client.pokemons.aggregate([
+    {
+        '$match': {
+            'Legendary': True
+        }
+    }, {
+        '$lookup': {
+            'from': 'combats', 
+            'localField': '#', 
+            'foreignField': 'Winner', 
+            'as': 'Victories'
+        }
+    }, {
+        '$project': {
+            '_id': 0, 
+            '#': 1, 
+            'Name': 1, 
+            'Legendary': 1, 
+            'Victories': {
+                '$size': '$Victories'
+            }
+        }
+    }
+    ])
+    return Response(
+        response=json_util.dumps({"records": legendary_winners}),
+        status=200,
+        mimetype='application/json'
+    )
