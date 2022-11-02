@@ -1,0 +1,28 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "First_pokemon",
+        "Second_pokemon",
+        "Winner"
+      ],
+      "properties": {
+        "_id": {
+          "bsonType": "objectId",
+          "description": "Chave definida da collection"
+        },
+        "First_pokemon": {
+          "bsonType": "int",
+          "description": "Referência ao id do pokemon"
+        },
+        "Second_pokemon": {
+          "bsonType": "int",
+          "description": "Referência ao id do pokemon"
+        },
+        "Winner": {
+          "bsonType": "int",
+          "description": "Referência ao id do pokemon"
+        }
+      }
+    }
+  }

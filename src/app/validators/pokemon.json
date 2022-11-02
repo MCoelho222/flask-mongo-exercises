@@ -1,0 +1,76 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "_id",
+        "#",
+        "Name",
+        "HP",
+        "Attack",
+        "Defense",
+        "Sp",
+        "Speed",
+        "Generation",
+        "Legendary"
+      ],
+      "properties": {
+        "_id": {
+          "bsonType": "objectId",
+          "description": "Chave definida da collection e campo obrigatório"
+        },
+        "#": {
+          "bsonType": "int",
+          "description": "Referência ao id do pokemon e campo obrigatório"
+        },
+        "name": {
+          "bsonType": "string",
+          "description": "Nome do pokemon e campo obrigatório"
+        },
+        "Type 1": {
+          "bsonType": "string",
+          "description": "Primeiro tipo do pokemon"
+        },
+        "Type 2": {
+          "bsonType": "string",
+          "description": "Segundo tipo do pokemon"
+        },
+        "HP": {
+          "bsonType": "int",
+          "description": "Status de vida do Pokemon e campo obrigatório"
+        },
+        "Attack": {
+          "bsonType": "int",
+          "description": "Status de ataque do Pokemon e campo obrigatório"
+        },
+        "Defense": {
+          "bsonType": "int",
+          "description": "Status de defesa do Pokemon e campo obrigatório"
+        },
+        "Sp": {
+          "bsonType": "object",
+          "properties": {
+            " Atk": {
+              "bsonType": "int",
+              "description": "Status de ataque especial do Pokemon e campo obrigatório"
+            },
+            " Def": {
+              "bsonType": "int",
+              "description": "Status de defesa especial do Pokemon e campo obrigatório"
+            }
+          }
+        },
+        "Speed": {
+          "bsonType": "int",
+          "description": "Status de velocidade do Pokemon e campo obrigatório"
+        },
+        "Generation": {
+          "bsonType": "int",
+          "description": "Geração do pokemon e campo obrigatório"
+        },
+        "Legendary": {
+          "bsonType": "bool",
+          "description": "Geração do pokemon e campo obrigatório"
+        }
+      }
+    }
+  }
