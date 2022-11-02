@@ -207,6 +207,27 @@ def list_lower_HP_pokemons():
 @pokemons.route("/list_lower_winner_pokemons", methods=['GET'])
 def list_lower_winner_pokemons():
     lowerWinner = mongo_client.pokemons.aggregate([
+        {
+            '$lookup': {
+                'from': 'combats',
+                'localField': '#',
+                'foreignField': 'Winner',
+                'as': 'Victories'
+            }
+        }, {
+            '$project': {
+                '_id': 0,
+                '#': 1,
+                'Name': 1,
+                'Victories': {
+                    '$size': '$Victories'
+                }
+            }
+        }, {
+            '$sort': {
+                'Victories': 1
+            }
+        }
         
     ])
     return Response(
