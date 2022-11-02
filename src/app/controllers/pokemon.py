@@ -179,3 +179,38 @@ def legendary_pokemons_most_winners():
         status=200,
         mimetype='application/json'
     )
+
+@pokemons.route("/list_lower_HP_pokemons", methods=['GET'])
+def list_lower_HP_pokemons():
+    lowerHP = mongo_client.pokemons.aggregate([
+        {
+            '$sort': {
+                "HP": 1
+            }
+        }, {
+            '$project': {
+                "_id": 0,
+                "#": 1,
+                "Name": 1,
+                "HP": 1
+            }
+        }, {
+            '$limit': 20
+        }
+    ])
+    return Response(
+        response=json_util.dumps({"records": lowerHP}),
+        status=200,
+        mimetype='application/json'
+    )
+
+@pokemons.route("/list_lower_winner_pokemons", methods=['GET'])
+def list_lower_winner_pokemons():
+    lowerWinner = mongo_client.pokemons.aggregate([
+        
+    ])
+    return Response(
+        response=json_util.dumps({"records": lowerWinner}),
+        status=200,
+        mimetype='application/json'
+    )
